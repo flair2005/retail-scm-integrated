@@ -3,3 +3,8 @@
 如果要在该系统上定制、咨询，请联系philip_chang@163.com。
 
 ![产品功能](/interface.png "Optional title")
+
+功能列表
+
+![功能列表](/functions.jpg "Optional title")
+
