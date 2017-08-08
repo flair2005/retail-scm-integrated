@@ -1,0 +1,212 @@
+
+
+
+
+<div id="msg"></div>
+
+
+
+
+
+
+
+<div class="row">
+	<ul class="nav nav-tabs" id="navi-tabs">
+	  <li class="active"><a data-toggle="tab" href="#summary">概览</a></li>
+	  
+		<li><a data-toggle="tab" href="#userAppList">用户应用程序</a></li>
+ 
+	</ul>
+
+</div>
+<div class="tab-content" style="padding-top: 10px" id='tab-content'>
+<div id="summary" class="tab-pane fade in active">
+<div class="row">
+	
+	<div class="col-xs-12 col-md-12">
+	
+	</div>
+</div>
+
+
+<div class="row">
+	
+	   
+	<c:set var="secUser" value="${ result}" scope="request" />
+<jsp:include page="../coreview/com.terapico.b2b2c.secuser.SecUser$Summary.jsp" />
+
+	
+</div>
+
+	
+	
+
+	<div class="row">
+<c:set var="userDomain" value="${ result.domain}" scope="request" />
+<jsp:include page="../coreview/com.terapico.b2b2c.userdomain.UserDomain$Info.jsp" />
+
+</div>
+
+
+
+
+
+
+
+
+	
+
+
+
+	</div><!-- end of <div id="summary" class="tab-pane fade in active">-->
+
+	
+
+	<div id="userAppList" class="tab-pane fade sublist">
+<jsp:include page="../coreview/com.terapico.b2b2c.userapp.UserApp$List.jsp" />
+</div>
+
+
+
+</div><!--<div class="tab-content" style="padding-top: 10px">-->
+<script>
+
+
+
+
+
+$(function() {
+	var linkfunc=function(event) {
+		//event.preventDefault();
+		var linkto=$(this).attr('href');
+		console.log(linkto);
+		//toggleActive($(this));		
+		var reqURI = linkto.substring(1);
+		
+		
+		var target = $("#result");
+		//console.log(target);
+		if(target.length){
+			console.log("trying to fill result")
+			fillResult(reqURI,"#result");
+			return;
+		}
+		
+		console.log("trying to fill content")
+		fillResult(reqURI,"#content");
+		
+	};
+	
+	$(".sublist").on("click", ".link-action",linkfunc);
+	$(".link-action").click(linkfunc);
+	$(".verb-action").click(function(event) {
+		
+		//event.preventDefault();
+
+		var linkto=$(this).attr('href');
+		console.log(linkto);
+		//toggleActive($(this));
+		
+		var reqURI = linkto.substring(1);
+		
+		
+		var target = $("#result");
+		
+		
+		console.log("trying to fill content")
+		fillResult(reqURI,"#content");
+		
+	});
+	
+	$(".sublist").on("click", ".page-action",function(event) {
+			
+		//event.preventDefault();
+
+		var linkto=$(this).attr('href');
+		console.log(linkto);
+		var reqURI = linkto.substring(1);
+		
+		console.log("trying to fill content")
+		
+		var id = $(this).parent().parent().attr("id");
+		console.log("get the linked -> "+linkto);
+		console.log("get the id -> "+id);
+		
+		fillPartialResult(reqURI,"#"+id);
+		
+		
+	});
+	
+	$(".sublist").on("click", ".delete-action",function(event) {
+			
+		//event.preventDefault();
+		var currentVersion = $(this).closest("tr").attr('currentVersion');
+		var linkto=$(this).attr('href')+currentVersion+"/";
+		console.log(linkto);
+		
+		
+		var pageToken = $(this).closest("table").attr("pageToken");
+		
+		
+		var reqURI = linkto.substring(1)+pageToken+"/";
+		
+		console.log("trying to fill content")
+		
+		var id = $(this).closest(".sublist").attr("id");
+		
+		
+		console.log("get the linked -> "+linkto);
+		console.log("get the id -> "+id);
+		
+		fillPartialResult(reqURI,"#"+id);
+		
+		
+	});
+	
+	
+	if(!isMobile){
+		console.log("code get here in mobile");
+		
+		
+		$("<li><a data-toggle='tab' href='#qr'>二维码</a></li>").appendTo('#navi-tabs');
+		
+			
+		
+		var qr = $("<div id='qr' class='tab-pane fade sublist'></div>");
+		
+		var container = $("<div class='row' style='font-size: 30px;' ></div>");
+		var imageContainer = $("<div id='imagediv' class='col-xs-12 col-md-12'style='padding-left:20px'>扫一扫手机上继续</div>")
+		
+		imageContainer.appendTo(container);
+		container.appendTo(qr);
+		console.log("current qr sect:" + qr.text());
+		qr.appendTo('#tab-content');
+		
+		
+		var qrcode = new QRCode("imagediv", {
+    			text: window.location.href,
+    			width: 128,
+    			height: 128,
+    			colorDark : "#000000",
+    			colorLight : "#ffffff",
+    			correctLevel : QRCode.CorrectLevel.H
+			});
+		
+		
+	
+	}
+
+	$(".sublist").on("keyup",".edit-value",handleCellReturn);
+	$(".sublist").on("keypress",".edit-value",handleCellReturn);
+	
+	//$(".edit-value").keyup(handleCellReturn);
+	//$(".edit-value").keypress(handleCellPress);
+	
+	
+
+});
+
+
+	
+</script>
+

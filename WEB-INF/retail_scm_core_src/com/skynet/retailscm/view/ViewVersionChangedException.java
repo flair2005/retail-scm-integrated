@@ -1,0 +1,13 @@
+
+package com.skynet.retailscm.view;
+import com.skynet.retailscm.EntityNotFoundException;
+
+public class ViewVersionChangedException extends ViewManagerException {
+	private static final long serialVersionUID = 1L;
+	public ViewVersionChangedException(String string) {
+		super(string);
+	}
+
+}
+
+

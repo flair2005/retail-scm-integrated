@@ -1,0 +1,1114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		if you do not like to use apache one, you can use spring, spring version is very slow.
+	  -->
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+	
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"	value="jdbc:mysql://localhost:3306/retail_scm?characterEncoding=utf8&amp;autoReconnect=true" />
+		<property name="username" value="root" />
+		<property name="password" value="0254891276" />
+		<property name="removeAbandoned" value="true"/>
+		<property name="initialSize" value="20" />
+		<property name="maxActive" value="30" />
+		
+		
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		
+
+	</bean>
+
+	
+	<bean id="retailStoreCountryCenterDAO" class="com.skynet.retailscm.retailstorecountrycenter.RetailStoreCountryCenterJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="reportDAO" ref="reportDAO" />
+		
+		<property name="catalogDAO" ref="catalogDAO" />
+		
+		<property name="retailStoreProvinceCenterDAO" ref="retailStoreProvinceCenterDAO" />
+		
+		<property name="retailStoreDAO" ref="retailStoreDAO" />
+		
+		<property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+		
+		<property name="goodsSupplierDAO" ref="goodsSupplierDAO" />
+		
+		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+		
+		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+		
+		<property name="warehouseDAO" ref="warehouseDAO" />
+		
+		<property name="transportFleetDAO" ref="transportFleetDAO" />
+		
+		<property name="accountSetDAO" ref="accountSetDAO" />
+		
+		<property name="levelOneDepartmentDAO" ref="levelOneDepartmentDAO" />
+		
+		<property name="skillTypeDAO" ref="skillTypeDAO" />
+		
+		<property name="responsibilityTypeDAO" ref="responsibilityTypeDAO" />
+		
+		<property name="terminationReasonDAO" ref="terminationReasonDAO" />
+		
+		<property name="terminationTypeDAO" ref="terminationTypeDAO" />
+		
+		<property name="occupationTypeDAO" ref="occupationTypeDAO" />
+		
+		<property name="leaveTypeDAO" ref="leaveTypeDAO" />
+		
+		<property name="salaryGradeDAO" ref="salaryGradeDAO" />
+		
+		<property name="interviewTypeDAO" ref="interviewTypeDAO" />
+		
+		<property name="trainingCourseTypeDAO" ref="trainingCourseTypeDAO" />
+		
+		<property name="publicHolidayDAO" ref="publicHolidayDAO" />
+		
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+		<property name="instructorDAO" ref="instructorDAO" />
+		
+		<property name="companyTrainingDAO" ref="companyTrainingDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="reportDAO" class="com.skynet.retailscm.report.ReportJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="reportLineDAO" ref="reportLineDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="reportLineDAO" class="com.skynet.retailscm.reportline.ReportLineJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="reportDAO" ref="reportDAO" />
+	</bean>	
+	
+	
+	<bean id="catalogDAO" class="com.skynet.retailscm.catalog.CatalogJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="levelOneCategoryDAO" ref="levelOneCategoryDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="levelOneCategoryDAO" class="com.skynet.retailscm.levelonecategory.LevelOneCategoryJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="catalogDAO" ref="catalogDAO" />
+		<property name="levelTwoCategoryDAO" ref="levelTwoCategoryDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="levelTwoCategoryDAO" class="com.skynet.retailscm.leveltwocategory.LevelTwoCategoryJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="levelOneCategoryDAO" ref="levelOneCategoryDAO" />
+		<property name="levelThreeCategoryDAO" ref="levelThreeCategoryDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="levelThreeCategoryDAO" class="com.skynet.retailscm.levelthreecategory.LevelThreeCategoryJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="levelTwoCategoryDAO" ref="levelTwoCategoryDAO" />
+		<property name="productDAO" ref="productDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="productDAO" class="com.skynet.retailscm.product.ProductJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="levelThreeCategoryDAO" ref="levelThreeCategoryDAO" />
+		<property name="skuDAO" ref="skuDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="skuDAO" class="com.skynet.retailscm.sku.SkuJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="productDAO" ref="productDAO" />
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreProvinceCenterDAO" class="com.skynet.retailscm.retailstoreprovincecenter.RetailStoreProvinceCenterJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="provinceCenterDepartmentDAO" ref="provinceCenterDepartmentDAO" />
+		
+		<property name="provinceCenterEmployeeDAO" ref="provinceCenterEmployeeDAO" />
+		
+		<property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="provinceCenterDepartmentDAO" class="com.skynet.retailscm.provincecenterdepartment.ProvinceCenterDepartmentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreProvinceCenterDAO" ref="retailStoreProvinceCenterDAO" />
+		<property name="provinceCenterEmployeeDAO" ref="provinceCenterEmployeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="provinceCenterEmployeeDAO" class="com.skynet.retailscm.provincecenteremployee.ProvinceCenterEmployeeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreProvinceCenterDAO" ref="retailStoreProvinceCenterDAO" /><property name="provinceCenterDepartmentDAO" ref="provinceCenterDepartmentDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreCityServiceCenterDAO" class="com.skynet.retailscm.retailstorecityservicecenter.RetailStoreCityServiceCenterJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreProvinceCenterDAO" ref="retailStoreProvinceCenterDAO" />
+		<property name="cityPartnerDAO" ref="cityPartnerDAO" />
+		
+		<property name="potentialCustomerDAO" ref="potentialCustomerDAO" />
+		
+		<property name="cityEventDAO" ref="cityEventDAO" />
+		
+		<property name="retailStoreDAO" ref="retailStoreDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="cityPartnerDAO" class="com.skynet.retailscm.citypartner.CityPartnerJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" />
+		<property name="potentialCustomerDAO" ref="potentialCustomerDAO" />
+		
+		<property name="potentialCustomerContactDAO" ref="potentialCustomerContactDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="potentialCustomerDAO" class="com.skynet.retailscm.potentialcustomer.PotentialCustomerJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="cityPartnerDAO" ref="cityPartnerDAO" /><property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" />
+		<property name="potentialCustomerContactPersonDAO" ref="potentialCustomerContactPersonDAO" />
+		
+		<property name="potentialCustomerContactDAO" ref="potentialCustomerContactDAO" />
+		
+		<property name="eventAttendanceDAO" ref="eventAttendanceDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="potentialCustomerContactPersonDAO" class="com.skynet.retailscm.potentialcustomercontactperson.PotentialCustomerContactPersonJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="potentialCustomerDAO" ref="potentialCustomerDAO" />
+		<property name="potentialCustomerContactDAO" ref="potentialCustomerContactDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="potentialCustomerContactDAO" class="com.skynet.retailscm.potentialcustomercontact.PotentialCustomerContactJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="cityPartnerDAO" ref="cityPartnerDAO" /><property name="potentialCustomerDAO" ref="potentialCustomerDAO" /><property name="potentialCustomerContactPersonDAO" ref="potentialCustomerContactPersonDAO" />
+	</bean>	
+	
+	
+	<bean id="cityEventDAO" class="com.skynet.retailscm.cityevent.CityEventJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" />
+		<property name="eventAttendanceDAO" ref="eventAttendanceDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="eventAttendanceDAO" class="com.skynet.retailscm.eventattendance.EventAttendanceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="cityEventDAO" ref="cityEventDAO" /><property name="potentialCustomerDAO" ref="potentialCustomerDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreDAO" class="com.skynet.retailscm.retailstore.RetailStoreJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" /><property name="retailStoreFranchisingDAO" ref="retailStoreFranchisingDAO" /><property name="retailStoreDecorationDAO" ref="retailStoreDecorationDAO" /><property name="retailStoreClosingDAO" ref="retailStoreClosingDAO" /><property name="retailStoreCreationDAO" ref="retailStoreCreationDAO" /><property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" /><property name="retailStoreInvestmentInvitationDAO" ref="retailStoreInvestmentInvitationDAO" /><property name="retailStoreOpeningDAO" ref="retailStoreOpeningDAO" />
+		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+		
+		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+		
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+		<property name="transportTaskDAO" ref="transportTaskDAO" />
+		
+		<property name="accountSetDAO" ref="accountSetDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreCreationDAO" class="com.skynet.retailscm.retailstorecreation.RetailStoreCreationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreDAO" ref="retailStoreDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreInvestmentInvitationDAO" class="com.skynet.retailscm.retailstoreinvestmentinvitation.RetailStoreInvestmentInvitationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreDAO" ref="retailStoreDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreFranchisingDAO" class="com.skynet.retailscm.retailstorefranchising.RetailStoreFranchisingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreDAO" ref="retailStoreDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreDecorationDAO" class="com.skynet.retailscm.retailstoredecoration.RetailStoreDecorationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreDAO" ref="retailStoreDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreOpeningDAO" class="com.skynet.retailscm.retailstoreopening.RetailStoreOpeningJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreDAO" ref="retailStoreDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreClosingDAO" class="com.skynet.retailscm.retailstoreclosing.RetailStoreClosingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreDAO" ref="retailStoreDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberDAO" class="com.skynet.retailscm.retailstoremember.RetailStoreMemberJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+		
+		<property name="retailStoreMemberCouponDAO" ref="retailStoreMemberCouponDAO" />
+		
+		<property name="memberWishlistDAO" ref="memberWishlistDAO" />
+		
+		<property name="memberRewardPointDAO" ref="memberRewardPointDAO" />
+		
+		<property name="memberRewardPointRedemptionDAO" ref="memberRewardPointRedemptionDAO" />
+		
+		<property name="retailStoreMemberAddressDAO" ref="retailStoreMemberAddressDAO" />
+		
+		<property name="retailStoreMemberGiftCardDAO" ref="retailStoreMemberGiftCardDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="consumerOrderDAO" class="com.skynet.retailscm.consumerorder.ConsumerOrderJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="supplyOrderApprovalDAO" ref="supplyOrderApprovalDAO" /><property name="supplyOrderDeliveryDAO" ref="supplyOrderDeliveryDAO" /><property name="supplyOrderShipmentDAO" ref="supplyOrderShipmentDAO" /><property name="supplyOrderConfirmationDAO" ref="supplyOrderConfirmationDAO" /><property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" /><property name="retailStoreDAO" ref="retailStoreDAO" /><property name="supplyOrderProcessingDAO" ref="supplyOrderProcessingDAO" />
+		<property name="consumerOrderLineItemDAO" ref="consumerOrderLineItemDAO" />
+		
+		<property name="consumerOrderShippingGroupDAO" ref="consumerOrderShippingGroupDAO" />
+		
+		<property name="consumerOrderPaymentGroupDAO" ref="consumerOrderPaymentGroupDAO" />
+		
+		<property name="consumerOrderPriceAdjustmentDAO" ref="consumerOrderPriceAdjustmentDAO" />
+		
+		<property name="retailStoreMemberGiftCardConsumeRecordDAO" ref="retailStoreMemberGiftCardConsumeRecordDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="consumerOrderConfirmationDAO" class="com.skynet.retailscm.consumerorderconfirmation.ConsumerOrderConfirmationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderApprovalDAO" class="com.skynet.retailscm.consumerorderapproval.ConsumerOrderApprovalJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderProcessingDAO" class="com.skynet.retailscm.consumerorderprocessing.ConsumerOrderProcessingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderShipmentDAO" class="com.skynet.retailscm.consumerordershipment.ConsumerOrderShipmentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderDeliveryDAO" class="com.skynet.retailscm.consumerorderdelivery.ConsumerOrderDeliveryJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderLineItemDAO" class="com.skynet.retailscm.consumerorderlineitem.ConsumerOrderLineItemJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderShippingGroupDAO" class="com.skynet.retailscm.consumerordershippinggroup.ConsumerOrderShippingGroupJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderPaymentGroupDAO" class="com.skynet.retailscm.consumerorderpaymentgroup.ConsumerOrderPaymentGroupJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderPriceAdjustmentDAO" class="com.skynet.retailscm.consumerorderpriceadjustment.ConsumerOrderPriceAdjustmentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberCouponDAO" class="com.skynet.retailscm.retailstoremembercoupon.RetailStoreMemberCouponJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="memberWishlistDAO" class="com.skynet.retailscm.memberwishlist.MemberWishlistJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+		<property name="memberWishlistProductDAO" ref="memberWishlistProductDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="memberRewardPointDAO" class="com.skynet.retailscm.memberrewardpoint.MemberRewardPointJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="memberRewardPointRedemptionDAO" class="com.skynet.retailscm.memberrewardpointredemption.MemberRewardPointRedemptionJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="memberWishlistProductDAO" class="com.skynet.retailscm.memberwishlistproduct.MemberWishlistProductJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="memberWishlistDAO" ref="memberWishlistDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberAddressDAO" class="com.skynet.retailscm.retailstorememberaddress.RetailStoreMemberAddressJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberGiftCardDAO" class="com.skynet.retailscm.retailstoremembergiftcard.RetailStoreMemberGiftCardJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+		<property name="retailStoreMemberGiftCardConsumeRecordDAO" ref="retailStoreMemberGiftCardConsumeRecordDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberGiftCardConsumeRecordDAO" class="com.skynet.retailscm.retailstoremembergiftcardconsumerecord.RetailStoreMemberGiftCardConsumeRecordJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="consumerOrderDAO" ref="consumerOrderDAO" /><property name="retailStoreMemberGiftCardDAO" ref="retailStoreMemberGiftCardDAO" />
+	</bean>	
+	
+	
+	<bean id="goodsSupplierDAO" class="com.skynet.retailscm.goodssupplier.GoodsSupplierJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="supplierProductDAO" ref="supplierProductDAO" />
+		
+		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+		
+		<property name="accountSetDAO" ref="accountSetDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="supplierProductDAO" class="com.skynet.retailscm.supplierproduct.SupplierProductJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="goodsSupplierDAO" ref="goodsSupplierDAO" />
+		<property name="productSupplyDurationDAO" ref="productSupplyDurationDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="productSupplyDurationDAO" class="com.skynet.retailscm.productsupplyduration.ProductSupplyDurationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="supplierProductDAO" ref="supplierProductDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderDAO" class="com.skynet.retailscm.supplyorder.SupplyOrderJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="supplyOrderApprovalDAO" ref="supplyOrderApprovalDAO" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" /><property name="supplyOrderDeliveryDAO" ref="supplyOrderDeliveryDAO" /><property name="goodsSupplierDAO" ref="goodsSupplierDAO" /><property name="supplyOrderPickingDAO" ref="supplyOrderPickingDAO" /><property name="supplyOrderShipmentDAO" ref="supplyOrderShipmentDAO" /><property name="supplyOrderConfirmationDAO" ref="supplyOrderConfirmationDAO" /><property name="supplyOrderProcessingDAO" ref="supplyOrderProcessingDAO" />
+		<property name="supplyOrderLineItemDAO" ref="supplyOrderLineItemDAO" />
+		
+		<property name="supplyOrderShippingGroupDAO" ref="supplyOrderShippingGroupDAO" />
+		
+		<property name="supplyOrderPaymentGroupDAO" ref="supplyOrderPaymentGroupDAO" />
+		
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="supplyOrderConfirmationDAO" class="com.skynet.retailscm.supplyorderconfirmation.SupplyOrderConfirmationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+		
+		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="supplyOrderApprovalDAO" class="com.skynet.retailscm.supplyorderapproval.SupplyOrderApprovalJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+		
+		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="supplyOrderProcessingDAO" class="com.skynet.retailscm.supplyorderprocessing.SupplyOrderProcessingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+		
+		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="supplyOrderPickingDAO" class="com.skynet.retailscm.supplyorderpicking.SupplyOrderPickingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="supplyOrderShipmentDAO" class="com.skynet.retailscm.supplyordershipment.SupplyOrderShipmentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+		
+		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="supplyOrderDeliveryDAO" class="com.skynet.retailscm.supplyorderdelivery.SupplyOrderDeliveryJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+		
+		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="supplyOrderLineItemDAO" class="com.skynet.retailscm.supplyorderlineitem.SupplyOrderLineItemJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="supplyOrderDAO" ref="supplyOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderShippingGroupDAO" class="com.skynet.retailscm.supplyordershippinggroup.SupplyOrderShippingGroupJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="supplyOrderDAO" ref="supplyOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderPaymentGroupDAO" class="com.skynet.retailscm.supplyorderpaymentgroup.SupplyOrderPaymentGroupJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="supplyOrderDAO" ref="supplyOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderDAO" class="com.skynet.retailscm.retailstoreorder.RetailStoreOrderJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreOrderApprovalDAO" ref="retailStoreOrderApprovalDAO" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" /><property name="retailStoreOrderDeliveryDAO" ref="retailStoreOrderDeliveryDAO" /><property name="retailStoreOrderPickingDAO" ref="retailStoreOrderPickingDAO" /><property name="retailStoreOrderShipmentDAO" ref="retailStoreOrderShipmentDAO" /><property name="retailStoreOrderConfirmationDAO" ref="retailStoreOrderConfirmationDAO" /><property name="retailStoreDAO" ref="retailStoreDAO" /><property name="retailStoreOrderProcessingDAO" ref="retailStoreOrderProcessingDAO" />
+		<property name="retailStoreOrderLineItemDAO" ref="retailStoreOrderLineItemDAO" />
+		
+		<property name="retailStoreOrderShippingGroupDAO" ref="retailStoreOrderShippingGroupDAO" />
+		
+		<property name="retailStoreOrderPaymentGroupDAO" ref="retailStoreOrderPaymentGroupDAO" />
+		
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderConfirmationDAO" class="com.skynet.retailscm.retailstoreorderconfirmation.RetailStoreOrderConfirmationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderApprovalDAO" class="com.skynet.retailscm.retailstoreorderapproval.RetailStoreOrderApprovalJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderProcessingDAO" class="com.skynet.retailscm.retailstoreorderprocessing.RetailStoreOrderProcessingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderPickingDAO" class="com.skynet.retailscm.retailstoreorderpicking.RetailStoreOrderPickingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderShipmentDAO" class="com.skynet.retailscm.retailstoreordershipment.RetailStoreOrderShipmentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderDeliveryDAO" class="com.skynet.retailscm.retailstoreorderdelivery.RetailStoreOrderDeliveryJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderLineItemDAO" class="com.skynet.retailscm.retailstoreorderlineitem.RetailStoreOrderLineItemJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderShippingGroupDAO" class="com.skynet.retailscm.retailstoreordershippinggroup.RetailStoreOrderShippingGroupJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderPaymentGroupDAO" class="com.skynet.retailscm.retailstoreorderpaymentgroup.RetailStoreOrderPaymentGroupJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="warehouseDAO" class="com.skynet.retailscm.warehouse.WarehouseJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="storageSpaceDAO" ref="storageSpaceDAO" />
+		
+		<property name="smartPalletDAO" ref="smartPalletDAO" />
+		
+		<property name="supplierSpaceDAO" ref="supplierSpaceDAO" />
+		
+		<property name="receivingSpaceDAO" ref="receivingSpaceDAO" />
+		
+		<property name="shippingSpaceDAO" ref="shippingSpaceDAO" />
+		
+		<property name="damageSpaceDAO" ref="damageSpaceDAO" />
+		
+		<property name="warehouseAssetDAO" ref="warehouseAssetDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="storageSpaceDAO" class="com.skynet.retailscm.storagespace.StorageSpaceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="warehouseDAO" ref="warehouseDAO" />
+		<property name="goodsShelfDAO" ref="goodsShelfDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="smartPalletDAO" class="com.skynet.retailscm.smartpallet.SmartPalletJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="warehouseDAO" ref="warehouseDAO" />
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="goodsShelfDAO" class="com.skynet.retailscm.goodsshelf.GoodsShelfJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="damageSpaceDAO" ref="damageSpaceDAO" /><property name="storageSpaceDAO" ref="storageSpaceDAO" /><property name="supplierSpaceDAO" ref="supplierSpaceDAO" />
+		<property name="goodsShelfStockCountDAO" ref="goodsShelfStockCountDAO" />
+		
+		<property name="goodsAllocationDAO" ref="goodsAllocationDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="goodsShelfStockCountDAO" class="com.skynet.retailscm.goodsshelfstockcount.GoodsShelfStockCountJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="goodsShelfDAO" ref="goodsShelfDAO" />
+		<property name="stockCountIssueTrackDAO" ref="stockCountIssueTrackDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="stockCountIssueTrackDAO" class="com.skynet.retailscm.stockcountissuetrack.StockCountIssueTrackJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="goodsShelfStockCountDAO" ref="goodsShelfStockCountDAO" />
+	</bean>	
+	
+	
+	<bean id="goodsAllocationDAO" class="com.skynet.retailscm.goodsallocation.GoodsAllocationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="goodsShelfDAO" ref="goodsShelfDAO" />
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="goodsDAO" class="com.skynet.retailscm.goods.GoodsJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="goodsAllocationDAO" ref="goodsAllocationDAO" /><property name="shippingSpaceDAO" ref="shippingSpaceDAO" /><property name="goodsPackagingDAO" ref="goodsPackagingDAO" /><property name="retailStoreDAO" ref="retailStoreDAO" /><property name="skuDAO" ref="skuDAO" /><property name="transportTaskDAO" ref="transportTaskDAO" /><property name="smartPalletDAO" ref="smartPalletDAO" /><property name="supplyOrderDAO" ref="supplyOrderDAO" /><property name="receivingSpaceDAO" ref="receivingSpaceDAO" /><property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+		<property name="goodsMovementDAO" ref="goodsMovementDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="goodsPackagingDAO" class="com.skynet.retailscm.goodspackaging.GoodsPackagingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="goodsMovementDAO" class="com.skynet.retailscm.goodsmovement.GoodsMovementJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="goodsDAO" ref="goodsDAO" />
+	</bean>	
+	
+	
+	<bean id="supplierSpaceDAO" class="com.skynet.retailscm.supplierspace.SupplierSpaceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="warehouseDAO" ref="warehouseDAO" />
+		<property name="goodsShelfDAO" ref="goodsShelfDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="receivingSpaceDAO" class="com.skynet.retailscm.receivingspace.ReceivingSpaceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="warehouseDAO" ref="warehouseDAO" />
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="shippingSpaceDAO" class="com.skynet.retailscm.shippingspace.ShippingSpaceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="warehouseDAO" ref="warehouseDAO" />
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="damageSpaceDAO" class="com.skynet.retailscm.damagespace.DamageSpaceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="warehouseDAO" ref="warehouseDAO" />
+		<property name="goodsShelfDAO" ref="goodsShelfDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="warehouseAssetDAO" class="com.skynet.retailscm.warehouseasset.WarehouseAssetJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="warehouseDAO" ref="warehouseDAO" />
+	</bean>	
+	
+	
+	<bean id="transportFleetDAO" class="com.skynet.retailscm.transportfleet.TransportFleetJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="transportTruckDAO" ref="transportTruckDAO" />
+		
+		<property name="truckDriverDAO" ref="truckDriverDAO" />
+		
+		<property name="transportTaskDAO" ref="transportTaskDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="transportTruckDAO" class="com.skynet.retailscm.transporttruck.TransportTruckJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="transportFleetDAO" ref="transportFleetDAO" />
+		<property name="transportTaskDAO" ref="transportTaskDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="truckDriverDAO" class="com.skynet.retailscm.truckdriver.TruckDriverJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="transportFleetDAO" ref="transportFleetDAO" />
+		<property name="transportTaskDAO" ref="transportTaskDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="transportTaskDAO" class="com.skynet.retailscm.transporttask.TransportTaskJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="truckDriverDAO" ref="truckDriverDAO" /><property name="transportFleetDAO" ref="transportFleetDAO" /><property name="transportTruckDAO" ref="transportTruckDAO" /><property name="retailStoreDAO" ref="retailStoreDAO" />
+		<property name="goodsDAO" ref="goodsDAO" />
+		
+		<property name="transportTaskTrackDAO" ref="transportTaskTrackDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="transportTaskTrackDAO" class="com.skynet.retailscm.transporttasktrack.TransportTaskTrackJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="transportTaskDAO" ref="transportTaskDAO" />
+	</bean>	
+	
+	
+	<bean id="accountSetDAO" class="com.skynet.retailscm.accountset.AccountSetJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" /><property name="goodsSupplierDAO" ref="goodsSupplierDAO" /><property name="retailStoreDAO" ref="retailStoreDAO" />
+		<property name="accountingSubjectDAO" ref="accountingSubjectDAO" />
+		
+		<property name="accountingPeriodDAO" ref="accountingPeriodDAO" />
+		
+		<property name="accountingDocumentTypeDAO" ref="accountingDocumentTypeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="accountingSubjectDAO" class="com.skynet.retailscm.accountingsubject.AccountingSubjectJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="accountSetDAO" ref="accountSetDAO" />
+		<property name="accountingDocumentLineDAO" ref="accountingDocumentLineDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="accountingPeriodDAO" class="com.skynet.retailscm.accountingperiod.AccountingPeriodJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="accountSetDAO" ref="accountSetDAO" />
+		<property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="accountingDocumentTypeDAO" class="com.skynet.retailscm.accountingdocumenttype.AccountingDocumentTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="accountSetDAO" ref="accountSetDAO" />
+		<property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="accountingDocumentDAO" class="com.skynet.retailscm.accountingdocument.AccountingDocumentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="accountingDocumentTypeDAO" ref="accountingDocumentTypeDAO" /><property name="accountingDocumentPostingDAO" ref="accountingDocumentPostingDAO" /><property name="accountingDocumentCreationDAO" ref="accountingDocumentCreationDAO" /><property name="accountingPeriodDAO" ref="accountingPeriodDAO" /><property name="accountingDocumentAuditingDAO" ref="accountingDocumentAuditingDAO" /><property name="accountingDocumentConfirmationDAO" ref="accountingDocumentConfirmationDAO" />
+		<property name="originalVoucherDAO" ref="originalVoucherDAO" />
+		
+		<property name="accountingDocumentLineDAO" ref="accountingDocumentLineDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="accountingDocumentCreationDAO" class="com.skynet.retailscm.accountingdocumentcreation.AccountingDocumentCreationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="accountingDocumentConfirmationDAO" class="com.skynet.retailscm.accountingdocumentconfirmation.AccountingDocumentConfirmationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="accountingDocumentAuditingDAO" class="com.skynet.retailscm.accountingdocumentauditing.AccountingDocumentAuditingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="accountingDocumentPostingDAO" class="com.skynet.retailscm.accountingdocumentposting.AccountingDocumentPostingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="originalVoucherDAO" class="com.skynet.retailscm.originalvoucher.OriginalVoucherJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="originalVoucherCreationDAO" ref="originalVoucherCreationDAO" /><property name="accountingDocumentDAO" ref="accountingDocumentDAO" /><property name="originalVoucherConfirmationDAO" ref="originalVoucherConfirmationDAO" /><property name="originalVoucherAuditingDAO" ref="originalVoucherAuditingDAO" />
+	</bean>	
+	
+	
+	<bean id="originalVoucherCreationDAO" class="com.skynet.retailscm.originalvouchercreation.OriginalVoucherCreationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="originalVoucherDAO" ref="originalVoucherDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="originalVoucherConfirmationDAO" class="com.skynet.retailscm.originalvoucherconfirmation.OriginalVoucherConfirmationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="originalVoucherDAO" ref="originalVoucherDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="originalVoucherAuditingDAO" class="com.skynet.retailscm.originalvoucherauditing.OriginalVoucherAuditingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="originalVoucherDAO" ref="originalVoucherDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="accountingDocumentLineDAO" class="com.skynet.retailscm.accountingdocumentline.AccountingDocumentLineJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="accountingSubjectDAO" ref="accountingSubjectDAO" /><property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+	</bean>	
+	
+	
+	<bean id="userDomainDAO" class="com.skynet.retailscm.userdomain.UserDomainJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="secUserDAO" ref="secUserDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="secUserDAO" class="com.skynet.retailscm.secuser.SecUserJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userDomainDAO" ref="userDomainDAO" />
+		<property name="userAppDAO" ref="userAppDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="userAppDAO" class="com.skynet.retailscm.userapp.UserAppJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+		<property name="objectAccessDAO" ref="objectAccessDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="objectAccessDAO" class="com.skynet.retailscm.objectaccess.ObjectAccessJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userAppDAO" ref="userAppDAO" />
+	</bean>	
+	
+	
+	<bean id="levelOneDepartmentDAO" class="com.skynet.retailscm.levelonedepartment.LevelOneDepartmentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="levelTwoDepartmentDAO" ref="levelTwoDepartmentDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="levelTwoDepartmentDAO" class="com.skynet.retailscm.leveltwodepartment.LevelTwoDepartmentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="levelOneDepartmentDAO" ref="levelOneDepartmentDAO" />
+		<property name="levelThreeDepartmentDAO" ref="levelThreeDepartmentDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="levelThreeDepartmentDAO" class="com.skynet.retailscm.levelthreedepartment.LevelThreeDepartmentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="levelTwoDepartmentDAO" ref="levelTwoDepartmentDAO" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="skillTypeDAO" class="com.skynet.retailscm.skilltype.SkillTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="employeeSkillDAO" ref="employeeSkillDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="responsibilityTypeDAO" class="com.skynet.retailscm.responsibilitytype.ResponsibilityTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="terminationReasonDAO" class="com.skynet.retailscm.terminationreason.TerminationReasonJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="terminationDAO" ref="terminationDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="terminationTypeDAO" class="com.skynet.retailscm.terminationtype.TerminationTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="terminationDAO" ref="terminationDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="occupationTypeDAO" class="com.skynet.retailscm.occupationtype.OccupationTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="leaveTypeDAO" class="com.skynet.retailscm.leavetype.LeaveTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="employeeLeaveDAO" ref="employeeLeaveDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="salaryGradeDAO" class="com.skynet.retailscm.salarygrade.SalaryGradeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+		<property name="employeeSalarySheetDAO" ref="employeeSalarySheetDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="interviewTypeDAO" class="com.skynet.retailscm.interviewtype.InterviewTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="employeeInterviewDAO" ref="employeeInterviewDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="trainingCourseTypeDAO" class="com.skynet.retailscm.trainingcoursetype.TrainingCourseTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="companyTrainingDAO" ref="companyTrainingDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="publicHolidayDAO" class="com.skynet.retailscm.publicholiday.PublicHolidayJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="terminationDAO" class="com.skynet.retailscm.termination.TerminationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="terminationTypeDAO" ref="terminationTypeDAO" /><property name="terminationReasonDAO" ref="terminationReasonDAO" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="viewDAO" class="com.skynet.retailscm.view.ViewJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
+	
+	
+	<bean id="employeeDAO" class="com.skynet.retailscm.employee.EmployeeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="terminationDAO" ref="terminationDAO" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" /><property name="responsibilityTypeDAO" ref="responsibilityTypeDAO" /><property name="salaryGradeDAO" ref="salaryGradeDAO" /><property name="levelThreeDepartmentDAO" ref="levelThreeDepartmentDAO" /><property name="occupationTypeDAO" ref="occupationTypeDAO" /><property name="jobApplicationDAO" ref="jobApplicationDAO" /><property name="offerAcceptanceDAO" ref="offerAcceptanceDAO" /><property name="offerApprovalDAO" ref="offerApprovalDAO" /><property name="professionInterviewDAO" ref="professionInterviewDAO" /><property name="hrInterviewDAO" ref="hrInterviewDAO" /><property name="employeeBoardingDAO" ref="employeeBoardingDAO" />
+		<property name="employeeCompanyTrainingDAO" ref="employeeCompanyTrainingDAO" />
+		
+		<property name="employeeSkillDAO" ref="employeeSkillDAO" />
+		
+		<property name="employeePerformanceDAO" ref="employeePerformanceDAO" />
+		
+		<property name="employeeWorkExperienceDAO" ref="employeeWorkExperienceDAO" />
+		
+		<property name="employeeLeaveDAO" ref="employeeLeaveDAO" />
+		
+		<property name="employeeInterviewDAO" ref="employeeInterviewDAO" />
+		
+		<property name="employeeAttendanceDAO" ref="employeeAttendanceDAO" />
+		
+		<property name="employeeQualifierDAO" ref="employeeQualifierDAO" />
+		
+		<property name="employeeEducationDAO" ref="employeeEducationDAO" />
+		
+		<property name="employeeAwardDAO" ref="employeeAwardDAO" />
+		
+		<property name="employeeSalarySheetDAO" ref="employeeSalarySheetDAO" />
+		
+		<property name="payingOffDAO" ref="payingOffDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="jobApplicationDAO" class="com.skynet.retailscm.jobapplication.JobApplicationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="professionInterviewDAO" class="com.skynet.retailscm.professioninterview.ProfessionInterviewJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="hrInterviewDAO" class="com.skynet.retailscm.hrinterview.HrInterviewJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="offerApprovalDAO" class="com.skynet.retailscm.offerapproval.OfferApprovalJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="offerAcceptanceDAO" class="com.skynet.retailscm.offeracceptance.OfferAcceptanceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="employeeBoardingDAO" class="com.skynet.retailscm.employeeboarding.EmployeeBoardingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="employeeDAO" ref="employeeDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="instructorDAO" class="com.skynet.retailscm.instructor.InstructorJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+		<property name="companyTrainingDAO" ref="companyTrainingDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="companyTrainingDAO" class="com.skynet.retailscm.companytraining.CompanyTrainingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" /><property name="instructorDAO" ref="instructorDAO" /><property name="trainingCourseTypeDAO" ref="trainingCourseTypeDAO" />
+		<property name="employeeCompanyTrainingDAO" ref="employeeCompanyTrainingDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="scoringDAO" class="com.skynet.retailscm.scoring.ScoringJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="employeeCompanyTrainingDAO" ref="employeeCompanyTrainingDAO" />
+		
+	</bean>	
+	
+	
+	<bean id="employeeCompanyTrainingDAO" class="com.skynet.retailscm.employeecompanytraining.EmployeeCompanyTrainingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="companyTrainingDAO" ref="companyTrainingDAO" /><property name="scoringDAO" ref="scoringDAO" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeSkillDAO" class="com.skynet.retailscm.employeeskill.EmployeeSkillJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="skillTypeDAO" ref="skillTypeDAO" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeePerformanceDAO" class="com.skynet.retailscm.employeeperformance.EmployeePerformanceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeWorkExperienceDAO" class="com.skynet.retailscm.employeeworkexperience.EmployeeWorkExperienceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeLeaveDAO" class="com.skynet.retailscm.employeeleave.EmployeeLeaveJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="leaveTypeDAO" ref="leaveTypeDAO" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeInterviewDAO" class="com.skynet.retailscm.employeeinterview.EmployeeInterviewJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="interviewTypeDAO" ref="interviewTypeDAO" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeAttendanceDAO" class="com.skynet.retailscm.employeeattendance.EmployeeAttendanceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeQualifierDAO" class="com.skynet.retailscm.employeequalifier.EmployeeQualifierJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeEducationDAO" class="com.skynet.retailscm.employeeeducation.EmployeeEducationJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeAwardDAO" class="com.skynet.retailscm.employeeaward.EmployeeAwardJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeSalarySheetDAO" class="com.skynet.retailscm.employeesalarysheet.EmployeeSalarySheetJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="salaryGradeDAO" ref="salaryGradeDAO" /><property name="payingOffDAO" ref="payingOffDAO" /><property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="payingOffDAO" class="com.skynet.retailscm.payingoff.PayingOffJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="employeeDAO" ref="employeeDAO" />
+		<property name="employeeSalarySheetDAO" ref="employeeSalarySheetDAO" />
+		
+	</bean>	
+	
+
+
+
+</beans>
+
+
+
+
+
+

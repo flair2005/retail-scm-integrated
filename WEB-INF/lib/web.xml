@@ -1,0 +1,29 @@
+
+<web-app>
+   
+   
+
+  
+  <display-name>Invoke Sample</display-name>
+  
+  
+  <session-config>
+    <file-store>WEB-INF/sessions</file-store>
+  </session-config>
+  
+  
+  
+  <servlet>
+    <servlet-name>invoke</servlet-name>
+    <servlet-class>com.terapico.naf.InvokeServlet</servlet-class>
+    
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>invoke</servlet-name>
+    <url-pattern>/**/</url-pattern>
+  </servlet-mapping>
+   <!-- <init-param invokehelperclass='com.terapico.naf.ObjectInvokeHelper'/> -->
+  
+  
+</web-app>

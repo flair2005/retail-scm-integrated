@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	
+	<bean id="retailStoreCountryCenterManager" class="com.skynet.retailscm.retailstorecountrycenter.RetailStoreCountryCenterManagerImpl">
+		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="reportManager" class="com.skynet.retailscm.report.ReportManagerImpl">
+		<property name="reportDAO" ref="reportDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="reportLineManager" class="com.skynet.retailscm.reportline.ReportLineManagerImpl">
+		<property name="reportLineDAO" ref="reportLineDAO" />
+	 		<property name="reportDAO" ref="reportDAO" />
+	</bean>	
+	
+	
+	<bean id="catalogManager" class="com.skynet.retailscm.catalog.CatalogManagerImpl">
+		<property name="catalogDAO" ref="catalogDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="levelOneCategoryManager" class="com.skynet.retailscm.levelonecategory.LevelOneCategoryManagerImpl">
+		<property name="levelOneCategoryDAO" ref="levelOneCategoryDAO" />
+	 		<property name="catalogDAO" ref="catalogDAO" />
+	</bean>	
+	
+	
+	<bean id="levelTwoCategoryManager" class="com.skynet.retailscm.leveltwocategory.LevelTwoCategoryManagerImpl">
+		<property name="levelTwoCategoryDAO" ref="levelTwoCategoryDAO" />
+	 		<property name="levelOneCategoryDAO" ref="levelOneCategoryDAO" />
+	</bean>	
+	
+	
+	<bean id="levelThreeCategoryManager" class="com.skynet.retailscm.levelthreecategory.LevelThreeCategoryManagerImpl">
+		<property name="levelThreeCategoryDAO" ref="levelThreeCategoryDAO" />
+	 		<property name="levelTwoCategoryDAO" ref="levelTwoCategoryDAO" />
+	</bean>	
+	
+	
+	<bean id="productManager" class="com.skynet.retailscm.product.ProductManagerImpl">
+		<property name="productDAO" ref="productDAO" />
+	 		<property name="levelThreeCategoryDAO" ref="levelThreeCategoryDAO" />
+	</bean>	
+	
+	
+	<bean id="skuManager" class="com.skynet.retailscm.sku.SkuManagerImpl">
+		<property name="skuDAO" ref="skuDAO" />
+	 		<property name="productDAO" ref="productDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreProvinceCenterManager" class="com.skynet.retailscm.retailstoreprovincecenter.RetailStoreProvinceCenterManagerImpl">
+		<property name="retailStoreProvinceCenterDAO" ref="retailStoreProvinceCenterDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="provinceCenterDepartmentManager" class="com.skynet.retailscm.provincecenterdepartment.ProvinceCenterDepartmentManagerImpl">
+		<property name="provinceCenterDepartmentDAO" ref="provinceCenterDepartmentDAO" />
+	 		<property name="retailStoreProvinceCenterDAO" ref="retailStoreProvinceCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="provinceCenterEmployeeManager" class="com.skynet.retailscm.provincecenteremployee.ProvinceCenterEmployeeManagerImpl">
+		<property name="provinceCenterEmployeeDAO" ref="provinceCenterEmployeeDAO" />
+	 		<property name="retailStoreProvinceCenterDAO" ref="retailStoreProvinceCenterDAO" />
+	 		<property name="provinceCenterDepartmentDAO" ref="provinceCenterDepartmentDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreCityServiceCenterManager" class="com.skynet.retailscm.retailstorecityservicecenter.RetailStoreCityServiceCenterManagerImpl">
+		<property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" />
+	 		<property name="retailStoreProvinceCenterDAO" ref="retailStoreProvinceCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="cityPartnerManager" class="com.skynet.retailscm.citypartner.CityPartnerManagerImpl">
+		<property name="cityPartnerDAO" ref="cityPartnerDAO" />
+	 		<property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="potentialCustomerManager" class="com.skynet.retailscm.potentialcustomer.PotentialCustomerManagerImpl">
+		<property name="potentialCustomerDAO" ref="potentialCustomerDAO" />
+	 		<property name="cityPartnerDAO" ref="cityPartnerDAO" />
+	 		<property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="potentialCustomerContactPersonManager" class="com.skynet.retailscm.potentialcustomercontactperson.PotentialCustomerContactPersonManagerImpl">
+		<property name="potentialCustomerContactPersonDAO" ref="potentialCustomerContactPersonDAO" />
+	 		<property name="potentialCustomerDAO" ref="potentialCustomerDAO" />
+	</bean>	
+	
+	
+	<bean id="potentialCustomerContactManager" class="com.skynet.retailscm.potentialcustomercontact.PotentialCustomerContactManagerImpl">
+		<property name="potentialCustomerContactDAO" ref="potentialCustomerContactDAO" />
+	 		<property name="cityPartnerDAO" ref="cityPartnerDAO" />
+	 		<property name="potentialCustomerDAO" ref="potentialCustomerDAO" />
+	 		<property name="potentialCustomerContactPersonDAO" ref="potentialCustomerContactPersonDAO" />
+	</bean>	
+	
+	
+	<bean id="cityEventManager" class="com.skynet.retailscm.cityevent.CityEventManagerImpl">
+		<property name="cityEventDAO" ref="cityEventDAO" />
+	 		<property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="eventAttendanceManager" class="com.skynet.retailscm.eventattendance.EventAttendanceManagerImpl">
+		<property name="eventAttendanceDAO" ref="eventAttendanceDAO" />
+	 		<property name="cityEventDAO" ref="cityEventDAO" />
+	 		<property name="potentialCustomerDAO" ref="potentialCustomerDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreManager" class="com.skynet.retailscm.retailstore.RetailStoreManagerImpl">
+		<property name="retailStoreDAO" ref="retailStoreDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	 		<property name="retailStoreFranchisingDAO" ref="retailStoreFranchisingDAO" />
+	 		<property name="retailStoreDecorationDAO" ref="retailStoreDecorationDAO" />
+	 		<property name="retailStoreClosingDAO" ref="retailStoreClosingDAO" />
+	 		<property name="retailStoreCreationDAO" ref="retailStoreCreationDAO" />
+	 		<property name="retailStoreCityServiceCenterDAO" ref="retailStoreCityServiceCenterDAO" />
+	 		<property name="retailStoreInvestmentInvitationDAO" ref="retailStoreInvestmentInvitationDAO" />
+	 		<property name="retailStoreOpeningDAO" ref="retailStoreOpeningDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreCreationManager" class="com.skynet.retailscm.retailstorecreation.RetailStoreCreationManagerImpl">
+		<property name="retailStoreCreationDAO" ref="retailStoreCreationDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreInvestmentInvitationManager" class="com.skynet.retailscm.retailstoreinvestmentinvitation.RetailStoreInvestmentInvitationManagerImpl">
+		<property name="retailStoreInvestmentInvitationDAO" ref="retailStoreInvestmentInvitationDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreFranchisingManager" class="com.skynet.retailscm.retailstorefranchising.RetailStoreFranchisingManagerImpl">
+		<property name="retailStoreFranchisingDAO" ref="retailStoreFranchisingDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreDecorationManager" class="com.skynet.retailscm.retailstoredecoration.RetailStoreDecorationManagerImpl">
+		<property name="retailStoreDecorationDAO" ref="retailStoreDecorationDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOpeningManager" class="com.skynet.retailscm.retailstoreopening.RetailStoreOpeningManagerImpl">
+		<property name="retailStoreOpeningDAO" ref="retailStoreOpeningDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreClosingManager" class="com.skynet.retailscm.retailstoreclosing.RetailStoreClosingManagerImpl">
+		<property name="retailStoreClosingDAO" ref="retailStoreClosingDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberManager" class="com.skynet.retailscm.retailstoremember.RetailStoreMemberManagerImpl">
+		<property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderManager" class="com.skynet.retailscm.consumerorder.ConsumerOrderManagerImpl">
+		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	 		<property name="supplyOrderApprovalDAO" ref="supplyOrderApprovalDAO" />
+	 		<property name="supplyOrderDeliveryDAO" ref="supplyOrderDeliveryDAO" />
+	 		<property name="supplyOrderShipmentDAO" ref="supplyOrderShipmentDAO" />
+	 		<property name="supplyOrderConfirmationDAO" ref="supplyOrderConfirmationDAO" />
+	 		<property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	 		<property name="retailStoreDAO" ref="retailStoreDAO" />
+	 		<property name="supplyOrderProcessingDAO" ref="supplyOrderProcessingDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderConfirmationManager" class="com.skynet.retailscm.consumerorderconfirmation.ConsumerOrderConfirmationManagerImpl">
+		<property name="consumerOrderConfirmationDAO" ref="consumerOrderConfirmationDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderApprovalManager" class="com.skynet.retailscm.consumerorderapproval.ConsumerOrderApprovalManagerImpl">
+		<property name="consumerOrderApprovalDAO" ref="consumerOrderApprovalDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderProcessingManager" class="com.skynet.retailscm.consumerorderprocessing.ConsumerOrderProcessingManagerImpl">
+		<property name="consumerOrderProcessingDAO" ref="consumerOrderProcessingDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderShipmentManager" class="com.skynet.retailscm.consumerordershipment.ConsumerOrderShipmentManagerImpl">
+		<property name="consumerOrderShipmentDAO" ref="consumerOrderShipmentDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderDeliveryManager" class="com.skynet.retailscm.consumerorderdelivery.ConsumerOrderDeliveryManagerImpl">
+		<property name="consumerOrderDeliveryDAO" ref="consumerOrderDeliveryDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderLineItemManager" class="com.skynet.retailscm.consumerorderlineitem.ConsumerOrderLineItemManagerImpl">
+		<property name="consumerOrderLineItemDAO" ref="consumerOrderLineItemDAO" />
+	 		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderShippingGroupManager" class="com.skynet.retailscm.consumerordershippinggroup.ConsumerOrderShippingGroupManagerImpl">
+		<property name="consumerOrderShippingGroupDAO" ref="consumerOrderShippingGroupDAO" />
+	 		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderPaymentGroupManager" class="com.skynet.retailscm.consumerorderpaymentgroup.ConsumerOrderPaymentGroupManagerImpl">
+		<property name="consumerOrderPaymentGroupDAO" ref="consumerOrderPaymentGroupDAO" />
+	 		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="consumerOrderPriceAdjustmentManager" class="com.skynet.retailscm.consumerorderpriceadjustment.ConsumerOrderPriceAdjustmentManagerImpl">
+		<property name="consumerOrderPriceAdjustmentDAO" ref="consumerOrderPriceAdjustmentDAO" />
+	 		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberCouponManager" class="com.skynet.retailscm.retailstoremembercoupon.RetailStoreMemberCouponManagerImpl">
+		<property name="retailStoreMemberCouponDAO" ref="retailStoreMemberCouponDAO" />
+	 		<property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="memberWishlistManager" class="com.skynet.retailscm.memberwishlist.MemberWishlistManagerImpl">
+		<property name="memberWishlistDAO" ref="memberWishlistDAO" />
+	 		<property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="memberRewardPointManager" class="com.skynet.retailscm.memberrewardpoint.MemberRewardPointManagerImpl">
+		<property name="memberRewardPointDAO" ref="memberRewardPointDAO" />
+	 		<property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="memberRewardPointRedemptionManager" class="com.skynet.retailscm.memberrewardpointredemption.MemberRewardPointRedemptionManagerImpl">
+		<property name="memberRewardPointRedemptionDAO" ref="memberRewardPointRedemptionDAO" />
+	 		<property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="memberWishlistProductManager" class="com.skynet.retailscm.memberwishlistproduct.MemberWishlistProductManagerImpl">
+		<property name="memberWishlistProductDAO" ref="memberWishlistProductDAO" />
+	 		<property name="memberWishlistDAO" ref="memberWishlistDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberAddressManager" class="com.skynet.retailscm.retailstorememberaddress.RetailStoreMemberAddressManagerImpl">
+		<property name="retailStoreMemberAddressDAO" ref="retailStoreMemberAddressDAO" />
+	 		<property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberGiftCardManager" class="com.skynet.retailscm.retailstoremembergiftcard.RetailStoreMemberGiftCardManagerImpl">
+		<property name="retailStoreMemberGiftCardDAO" ref="retailStoreMemberGiftCardDAO" />
+	 		<property name="retailStoreMemberDAO" ref="retailStoreMemberDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreMemberGiftCardConsumeRecordManager" class="com.skynet.retailscm.retailstoremembergiftcardconsumerecord.RetailStoreMemberGiftCardConsumeRecordManagerImpl">
+		<property name="retailStoreMemberGiftCardConsumeRecordDAO" ref="retailStoreMemberGiftCardConsumeRecordDAO" />
+	 		<property name="consumerOrderDAO" ref="consumerOrderDAO" />
+	 		<property name="retailStoreMemberGiftCardDAO" ref="retailStoreMemberGiftCardDAO" />
+	</bean>	
+	
+	
+	<bean id="goodsSupplierManager" class="com.skynet.retailscm.goodssupplier.GoodsSupplierManagerImpl">
+		<property name="goodsSupplierDAO" ref="goodsSupplierDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="supplierProductManager" class="com.skynet.retailscm.supplierproduct.SupplierProductManagerImpl">
+		<property name="supplierProductDAO" ref="supplierProductDAO" />
+	 		<property name="goodsSupplierDAO" ref="goodsSupplierDAO" />
+	</bean>	
+	
+	
+	<bean id="productSupplyDurationManager" class="com.skynet.retailscm.productsupplyduration.ProductSupplyDurationManagerImpl">
+		<property name="productSupplyDurationDAO" ref="productSupplyDurationDAO" />
+	 		<property name="supplierProductDAO" ref="supplierProductDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderManager" class="com.skynet.retailscm.supplyorder.SupplyOrderManagerImpl">
+		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+	 		<property name="supplyOrderApprovalDAO" ref="supplyOrderApprovalDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	 		<property name="supplyOrderDeliveryDAO" ref="supplyOrderDeliveryDAO" />
+	 		<property name="goodsSupplierDAO" ref="goodsSupplierDAO" />
+	 		<property name="supplyOrderPickingDAO" ref="supplyOrderPickingDAO" />
+	 		<property name="supplyOrderShipmentDAO" ref="supplyOrderShipmentDAO" />
+	 		<property name="supplyOrderConfirmationDAO" ref="supplyOrderConfirmationDAO" />
+	 		<property name="supplyOrderProcessingDAO" ref="supplyOrderProcessingDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderConfirmationManager" class="com.skynet.retailscm.supplyorderconfirmation.SupplyOrderConfirmationManagerImpl">
+		<property name="supplyOrderConfirmationDAO" ref="supplyOrderConfirmationDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderApprovalManager" class="com.skynet.retailscm.supplyorderapproval.SupplyOrderApprovalManagerImpl">
+		<property name="supplyOrderApprovalDAO" ref="supplyOrderApprovalDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderProcessingManager" class="com.skynet.retailscm.supplyorderprocessing.SupplyOrderProcessingManagerImpl">
+		<property name="supplyOrderProcessingDAO" ref="supplyOrderProcessingDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderPickingManager" class="com.skynet.retailscm.supplyorderpicking.SupplyOrderPickingManagerImpl">
+		<property name="supplyOrderPickingDAO" ref="supplyOrderPickingDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderShipmentManager" class="com.skynet.retailscm.supplyordershipment.SupplyOrderShipmentManagerImpl">
+		<property name="supplyOrderShipmentDAO" ref="supplyOrderShipmentDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderDeliveryManager" class="com.skynet.retailscm.supplyorderdelivery.SupplyOrderDeliveryManagerImpl">
+		<property name="supplyOrderDeliveryDAO" ref="supplyOrderDeliveryDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderLineItemManager" class="com.skynet.retailscm.supplyorderlineitem.SupplyOrderLineItemManagerImpl">
+		<property name="supplyOrderLineItemDAO" ref="supplyOrderLineItemDAO" />
+	 		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderShippingGroupManager" class="com.skynet.retailscm.supplyordershippinggroup.SupplyOrderShippingGroupManagerImpl">
+		<property name="supplyOrderShippingGroupDAO" ref="supplyOrderShippingGroupDAO" />
+	 		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="supplyOrderPaymentGroupManager" class="com.skynet.retailscm.supplyorderpaymentgroup.SupplyOrderPaymentGroupManagerImpl">
+		<property name="supplyOrderPaymentGroupDAO" ref="supplyOrderPaymentGroupDAO" />
+	 		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderManager" class="com.skynet.retailscm.retailstoreorder.RetailStoreOrderManagerImpl">
+		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+	 		<property name="retailStoreOrderApprovalDAO" ref="retailStoreOrderApprovalDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	 		<property name="retailStoreOrderDeliveryDAO" ref="retailStoreOrderDeliveryDAO" />
+	 		<property name="retailStoreOrderPickingDAO" ref="retailStoreOrderPickingDAO" />
+	 		<property name="retailStoreOrderShipmentDAO" ref="retailStoreOrderShipmentDAO" />
+	 		<property name="retailStoreOrderConfirmationDAO" ref="retailStoreOrderConfirmationDAO" />
+	 		<property name="retailStoreDAO" ref="retailStoreDAO" />
+	 		<property name="retailStoreOrderProcessingDAO" ref="retailStoreOrderProcessingDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderConfirmationManager" class="com.skynet.retailscm.retailstoreorderconfirmation.RetailStoreOrderConfirmationManagerImpl">
+		<property name="retailStoreOrderConfirmationDAO" ref="retailStoreOrderConfirmationDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderApprovalManager" class="com.skynet.retailscm.retailstoreorderapproval.RetailStoreOrderApprovalManagerImpl">
+		<property name="retailStoreOrderApprovalDAO" ref="retailStoreOrderApprovalDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderProcessingManager" class="com.skynet.retailscm.retailstoreorderprocessing.RetailStoreOrderProcessingManagerImpl">
+		<property name="retailStoreOrderProcessingDAO" ref="retailStoreOrderProcessingDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderPickingManager" class="com.skynet.retailscm.retailstoreorderpicking.RetailStoreOrderPickingManagerImpl">
+		<property name="retailStoreOrderPickingDAO" ref="retailStoreOrderPickingDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderShipmentManager" class="com.skynet.retailscm.retailstoreordershipment.RetailStoreOrderShipmentManagerImpl">
+		<property name="retailStoreOrderShipmentDAO" ref="retailStoreOrderShipmentDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderDeliveryManager" class="com.skynet.retailscm.retailstoreorderdelivery.RetailStoreOrderDeliveryManagerImpl">
+		<property name="retailStoreOrderDeliveryDAO" ref="retailStoreOrderDeliveryDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderLineItemManager" class="com.skynet.retailscm.retailstoreorderlineitem.RetailStoreOrderLineItemManagerImpl">
+		<property name="retailStoreOrderLineItemDAO" ref="retailStoreOrderLineItemDAO" />
+	 		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderShippingGroupManager" class="com.skynet.retailscm.retailstoreordershippinggroup.RetailStoreOrderShippingGroupManagerImpl">
+		<property name="retailStoreOrderShippingGroupDAO" ref="retailStoreOrderShippingGroupDAO" />
+	 		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="retailStoreOrderPaymentGroupManager" class="com.skynet.retailscm.retailstoreorderpaymentgroup.RetailStoreOrderPaymentGroupManagerImpl">
+		<property name="retailStoreOrderPaymentGroupDAO" ref="retailStoreOrderPaymentGroupDAO" />
+	 		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="warehouseManager" class="com.skynet.retailscm.warehouse.WarehouseManagerImpl">
+		<property name="warehouseDAO" ref="warehouseDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="storageSpaceManager" class="com.skynet.retailscm.storagespace.StorageSpaceManagerImpl">
+		<property name="storageSpaceDAO" ref="storageSpaceDAO" />
+	 		<property name="warehouseDAO" ref="warehouseDAO" />
+	</bean>	
+	
+	
+	<bean id="smartPalletManager" class="com.skynet.retailscm.smartpallet.SmartPalletManagerImpl">
+		<property name="smartPalletDAO" ref="smartPalletDAO" />
+	 		<property name="warehouseDAO" ref="warehouseDAO" />
+	</bean>	
+	
+	
+	<bean id="goodsShelfManager" class="com.skynet.retailscm.goodsshelf.GoodsShelfManagerImpl">
+		<property name="goodsShelfDAO" ref="goodsShelfDAO" />
+	 		<property name="damageSpaceDAO" ref="damageSpaceDAO" />
+	 		<property name="storageSpaceDAO" ref="storageSpaceDAO" />
+	 		<property name="supplierSpaceDAO" ref="supplierSpaceDAO" />
+	</bean>	
+	
+	
+	<bean id="goodsShelfStockCountManager" class="com.skynet.retailscm.goodsshelfstockcount.GoodsShelfStockCountManagerImpl">
+		<property name="goodsShelfStockCountDAO" ref="goodsShelfStockCountDAO" />
+	 		<property name="goodsShelfDAO" ref="goodsShelfDAO" />
+	</bean>	
+	
+	
+	<bean id="stockCountIssueTrackManager" class="com.skynet.retailscm.stockcountissuetrack.StockCountIssueTrackManagerImpl">
+		<property name="stockCountIssueTrackDAO" ref="stockCountIssueTrackDAO" />
+	 		<property name="goodsShelfStockCountDAO" ref="goodsShelfStockCountDAO" />
+	</bean>	
+	
+	
+	<bean id="goodsAllocationManager" class="com.skynet.retailscm.goodsallocation.GoodsAllocationManagerImpl">
+		<property name="goodsAllocationDAO" ref="goodsAllocationDAO" />
+	 		<property name="goodsShelfDAO" ref="goodsShelfDAO" />
+	</bean>	
+	
+	
+	<bean id="goodsManager" class="com.skynet.retailscm.goods.GoodsManagerImpl">
+		<property name="goodsDAO" ref="goodsDAO" />
+	 		<property name="goodsAllocationDAO" ref="goodsAllocationDAO" />
+	 		<property name="shippingSpaceDAO" ref="shippingSpaceDAO" />
+	 		<property name="goodsPackagingDAO" ref="goodsPackagingDAO" />
+	 		<property name="retailStoreDAO" ref="retailStoreDAO" />
+	 		<property name="skuDAO" ref="skuDAO" />
+	 		<property name="transportTaskDAO" ref="transportTaskDAO" />
+	 		<property name="smartPalletDAO" ref="smartPalletDAO" />
+	 		<property name="supplyOrderDAO" ref="supplyOrderDAO" />
+	 		<property name="receivingSpaceDAO" ref="receivingSpaceDAO" />
+	 		<property name="retailStoreOrderDAO" ref="retailStoreOrderDAO" />
+	</bean>	
+	
+	
+	<bean id="goodsPackagingManager" class="com.skynet.retailscm.goodspackaging.GoodsPackagingManagerImpl">
+		<property name="goodsPackagingDAO" ref="goodsPackagingDAO" />
+	</bean>	
+	
+	
+	<bean id="goodsMovementManager" class="com.skynet.retailscm.goodsmovement.GoodsMovementManagerImpl">
+		<property name="goodsMovementDAO" ref="goodsMovementDAO" />
+	 		<property name="goodsDAO" ref="goodsDAO" />
+	</bean>	
+	
+	
+	<bean id="supplierSpaceManager" class="com.skynet.retailscm.supplierspace.SupplierSpaceManagerImpl">
+		<property name="supplierSpaceDAO" ref="supplierSpaceDAO" />
+	 		<property name="warehouseDAO" ref="warehouseDAO" />
+	</bean>	
+	
+	
+	<bean id="receivingSpaceManager" class="com.skynet.retailscm.receivingspace.ReceivingSpaceManagerImpl">
+		<property name="receivingSpaceDAO" ref="receivingSpaceDAO" />
+	 		<property name="warehouseDAO" ref="warehouseDAO" />
+	</bean>	
+	
+	
+	<bean id="shippingSpaceManager" class="com.skynet.retailscm.shippingspace.ShippingSpaceManagerImpl">
+		<property name="shippingSpaceDAO" ref="shippingSpaceDAO" />
+	 		<property name="warehouseDAO" ref="warehouseDAO" />
+	</bean>	
+	
+	
+	<bean id="damageSpaceManager" class="com.skynet.retailscm.damagespace.DamageSpaceManagerImpl">
+		<property name="damageSpaceDAO" ref="damageSpaceDAO" />
+	 		<property name="warehouseDAO" ref="warehouseDAO" />
+	</bean>	
+	
+	
+	<bean id="warehouseAssetManager" class="com.skynet.retailscm.warehouseasset.WarehouseAssetManagerImpl">
+		<property name="warehouseAssetDAO" ref="warehouseAssetDAO" />
+	 		<property name="warehouseDAO" ref="warehouseDAO" />
+	</bean>	
+	
+	
+	<bean id="transportFleetManager" class="com.skynet.retailscm.transportfleet.TransportFleetManagerImpl">
+		<property name="transportFleetDAO" ref="transportFleetDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="transportTruckManager" class="com.skynet.retailscm.transporttruck.TransportTruckManagerImpl">
+		<property name="transportTruckDAO" ref="transportTruckDAO" />
+	 		<property name="transportFleetDAO" ref="transportFleetDAO" />
+	</bean>	
+	
+	
+	<bean id="truckDriverManager" class="com.skynet.retailscm.truckdriver.TruckDriverManagerImpl">
+		<property name="truckDriverDAO" ref="truckDriverDAO" />
+	 		<property name="transportFleetDAO" ref="transportFleetDAO" />
+	</bean>	
+	
+	
+	<bean id="transportTaskManager" class="com.skynet.retailscm.transporttask.TransportTaskManagerImpl">
+		<property name="transportTaskDAO" ref="transportTaskDAO" />
+	 		<property name="truckDriverDAO" ref="truckDriverDAO" />
+	 		<property name="transportFleetDAO" ref="transportFleetDAO" />
+	 		<property name="transportTruckDAO" ref="transportTruckDAO" />
+	 		<property name="retailStoreDAO" ref="retailStoreDAO" />
+	</bean>	
+	
+	
+	<bean id="transportTaskTrackManager" class="com.skynet.retailscm.transporttasktrack.TransportTaskTrackManagerImpl">
+		<property name="transportTaskTrackDAO" ref="transportTaskTrackDAO" />
+	 		<property name="transportTaskDAO" ref="transportTaskDAO" />
+	</bean>	
+	
+	
+	<bean id="accountSetManager" class="com.skynet.retailscm.accountset.AccountSetManagerImpl">
+		<property name="accountSetDAO" ref="accountSetDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	 		<property name="goodsSupplierDAO" ref="goodsSupplierDAO" />
+	 		<property name="retailStoreDAO" ref="retailStoreDAO" />
+	</bean>	
+	
+	
+	<bean id="accountingSubjectManager" class="com.skynet.retailscm.accountingsubject.AccountingSubjectManagerImpl">
+		<property name="accountingSubjectDAO" ref="accountingSubjectDAO" />
+	 		<property name="accountSetDAO" ref="accountSetDAO" />
+	</bean>	
+	
+	
+	<bean id="accountingPeriodManager" class="com.skynet.retailscm.accountingperiod.AccountingPeriodManagerImpl">
+		<property name="accountingPeriodDAO" ref="accountingPeriodDAO" />
+	 		<property name="accountSetDAO" ref="accountSetDAO" />
+	</bean>	
+	
+	
+	<bean id="accountingDocumentTypeManager" class="com.skynet.retailscm.accountingdocumenttype.AccountingDocumentTypeManagerImpl">
+		<property name="accountingDocumentTypeDAO" ref="accountingDocumentTypeDAO" />
+	 		<property name="accountSetDAO" ref="accountSetDAO" />
+	</bean>	
+	
+	
+	<bean id="accountingDocumentManager" class="com.skynet.retailscm.accountingdocument.AccountingDocumentManagerImpl">
+		<property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+	 		<property name="accountingDocumentTypeDAO" ref="accountingDocumentTypeDAO" />
+	 		<property name="accountingDocumentPostingDAO" ref="accountingDocumentPostingDAO" />
+	 		<property name="accountingDocumentCreationDAO" ref="accountingDocumentCreationDAO" />
+	 		<property name="accountingPeriodDAO" ref="accountingPeriodDAO" />
+	 		<property name="accountingDocumentAuditingDAO" ref="accountingDocumentAuditingDAO" />
+	 		<property name="accountingDocumentConfirmationDAO" ref="accountingDocumentConfirmationDAO" />
+	</bean>	
+	
+	
+	<bean id="accountingDocumentCreationManager" class="com.skynet.retailscm.accountingdocumentcreation.AccountingDocumentCreationManagerImpl">
+		<property name="accountingDocumentCreationDAO" ref="accountingDocumentCreationDAO" />
+	</bean>	
+	
+	
+	<bean id="accountingDocumentConfirmationManager" class="com.skynet.retailscm.accountingdocumentconfirmation.AccountingDocumentConfirmationManagerImpl">
+		<property name="accountingDocumentConfirmationDAO" ref="accountingDocumentConfirmationDAO" />
+	</bean>	
+	
+	
+	<bean id="accountingDocumentAuditingManager" class="com.skynet.retailscm.accountingdocumentauditing.AccountingDocumentAuditingManagerImpl">
+		<property name="accountingDocumentAuditingDAO" ref="accountingDocumentAuditingDAO" />
+	</bean>	
+	
+	
+	<bean id="accountingDocumentPostingManager" class="com.skynet.retailscm.accountingdocumentposting.AccountingDocumentPostingManagerImpl">
+		<property name="accountingDocumentPostingDAO" ref="accountingDocumentPostingDAO" />
+	</bean>	
+	
+	
+	<bean id="originalVoucherManager" class="com.skynet.retailscm.originalvoucher.OriginalVoucherManagerImpl">
+		<property name="originalVoucherDAO" ref="originalVoucherDAO" />
+	 		<property name="originalVoucherCreationDAO" ref="originalVoucherCreationDAO" />
+	 		<property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+	 		<property name="originalVoucherConfirmationDAO" ref="originalVoucherConfirmationDAO" />
+	 		<property name="originalVoucherAuditingDAO" ref="originalVoucherAuditingDAO" />
+	</bean>	
+	
+	
+	<bean id="originalVoucherCreationManager" class="com.skynet.retailscm.originalvouchercreation.OriginalVoucherCreationManagerImpl">
+		<property name="originalVoucherCreationDAO" ref="originalVoucherCreationDAO" />
+	</bean>	
+	
+	
+	<bean id="originalVoucherConfirmationManager" class="com.skynet.retailscm.originalvoucherconfirmation.OriginalVoucherConfirmationManagerImpl">
+		<property name="originalVoucherConfirmationDAO" ref="originalVoucherConfirmationDAO" />
+	</bean>	
+	
+	
+	<bean id="originalVoucherAuditingManager" class="com.skynet.retailscm.originalvoucherauditing.OriginalVoucherAuditingManagerImpl">
+		<property name="originalVoucherAuditingDAO" ref="originalVoucherAuditingDAO" />
+	</bean>	
+	
+	
+	<bean id="accountingDocumentLineManager" class="com.skynet.retailscm.accountingdocumentline.AccountingDocumentLineManagerImpl">
+		<property name="accountingDocumentLineDAO" ref="accountingDocumentLineDAO" />
+	 		<property name="accountingSubjectDAO" ref="accountingSubjectDAO" />
+	 		<property name="accountingDocumentDAO" ref="accountingDocumentDAO" />
+	</bean>	
+	
+	
+	<bean id="userDomainManager" class="com.skynet.retailscm.userdomain.UserDomainManagerImpl">
+		<property name="userDomainDAO" ref="userDomainDAO" />
+	</bean>	
+	
+	
+	<bean id="secUserManager" class="com.skynet.retailscm.secuser.SecUserManagerImpl">
+		<property name="secUserDAO" ref="secUserDAO" />
+	 		<property name="userDomainDAO" ref="userDomainDAO" />
+	</bean>	
+	
+	
+	<bean id="userAppManager" class="com.skynet.retailscm.userapp.UserAppManagerImpl">
+		<property name="userAppDAO" ref="userAppDAO" />
+	 		<property name="secUserDAO" ref="secUserDAO" />
+	</bean>	
+	
+	
+	<bean id="objectAccessManager" class="com.skynet.retailscm.objectaccess.ObjectAccessManagerImpl">
+		<property name="objectAccessDAO" ref="objectAccessDAO" />
+	 		<property name="userAppDAO" ref="userAppDAO" />
+	</bean>	
+	
+	
+	<bean id="levelOneDepartmentManager" class="com.skynet.retailscm.levelonedepartment.LevelOneDepartmentManagerImpl">
+		<property name="levelOneDepartmentDAO" ref="levelOneDepartmentDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="levelTwoDepartmentManager" class="com.skynet.retailscm.leveltwodepartment.LevelTwoDepartmentManagerImpl">
+		<property name="levelTwoDepartmentDAO" ref="levelTwoDepartmentDAO" />
+	 		<property name="levelOneDepartmentDAO" ref="levelOneDepartmentDAO" />
+	</bean>	
+	
+	
+	<bean id="levelThreeDepartmentManager" class="com.skynet.retailscm.levelthreedepartment.LevelThreeDepartmentManagerImpl">
+		<property name="levelThreeDepartmentDAO" ref="levelThreeDepartmentDAO" />
+	 		<property name="levelTwoDepartmentDAO" ref="levelTwoDepartmentDAO" />
+	</bean>	
+	
+	
+	<bean id="skillTypeManager" class="com.skynet.retailscm.skilltype.SkillTypeManagerImpl">
+		<property name="skillTypeDAO" ref="skillTypeDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="responsibilityTypeManager" class="com.skynet.retailscm.responsibilitytype.ResponsibilityTypeManagerImpl">
+		<property name="responsibilityTypeDAO" ref="responsibilityTypeDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="terminationReasonManager" class="com.skynet.retailscm.terminationreason.TerminationReasonManagerImpl">
+		<property name="terminationReasonDAO" ref="terminationReasonDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="terminationTypeManager" class="com.skynet.retailscm.terminationtype.TerminationTypeManagerImpl">
+		<property name="terminationTypeDAO" ref="terminationTypeDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="occupationTypeManager" class="com.skynet.retailscm.occupationtype.OccupationTypeManagerImpl">
+		<property name="occupationTypeDAO" ref="occupationTypeDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="leaveTypeManager" class="com.skynet.retailscm.leavetype.LeaveTypeManagerImpl">
+		<property name="leaveTypeDAO" ref="leaveTypeDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="salaryGradeManager" class="com.skynet.retailscm.salarygrade.SalaryGradeManagerImpl">
+		<property name="salaryGradeDAO" ref="salaryGradeDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="interviewTypeManager" class="com.skynet.retailscm.interviewtype.InterviewTypeManagerImpl">
+		<property name="interviewTypeDAO" ref="interviewTypeDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="trainingCourseTypeManager" class="com.skynet.retailscm.trainingcoursetype.TrainingCourseTypeManagerImpl">
+		<property name="trainingCourseTypeDAO" ref="trainingCourseTypeDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="publicHolidayManager" class="com.skynet.retailscm.publicholiday.PublicHolidayManagerImpl">
+		<property name="publicHolidayDAO" ref="publicHolidayDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="terminationManager" class="com.skynet.retailscm.termination.TerminationManagerImpl">
+		<property name="terminationDAO" ref="terminationDAO" />
+	 		<property name="terminationTypeDAO" ref="terminationTypeDAO" />
+	 		<property name="terminationReasonDAO" ref="terminationReasonDAO" />
+	</bean>	
+	
+	
+	<bean id="viewManager" class="com.skynet.retailscm.view.ViewManagerImpl">
+		<property name="viewDAO" ref="viewDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeManager" class="com.skynet.retailscm.employee.EmployeeManagerImpl">
+		<property name="employeeDAO" ref="employeeDAO" />
+	 		<property name="terminationDAO" ref="terminationDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	 		<property name="offerAcceptanceDAO" ref="offerAcceptanceDAO" />
+	 		<property name="offerApprovalDAO" ref="offerApprovalDAO" />
+	 		<property name="terminationReasonDAO" ref="terminationReasonDAO" />
+	 		<property name="hrInterviewDAO" ref="hrInterviewDAO" />
+	 		<property name="responsibilityTypeDAO" ref="responsibilityTypeDAO" />
+	 		<property name="salaryGradeDAO" ref="salaryGradeDAO" />
+	 		<property name="terminationTypeDAO" ref="terminationTypeDAO" />
+	 		<property name="levelThreeDepartmentDAO" ref="levelThreeDepartmentDAO" />
+	 		<property name="occupationTypeDAO" ref="occupationTypeDAO" />
+	 		<property name="jobApplicationDAO" ref="jobApplicationDAO" />
+	 		<property name="professionInterviewDAO" ref="professionInterviewDAO" />
+	 		<property name="employeeBoardingDAO" ref="employeeBoardingDAO" />
+	</bean>	
+	
+	
+	<bean id="jobApplicationManager" class="com.skynet.retailscm.jobapplication.JobApplicationManagerImpl">
+		<property name="jobApplicationDAO" ref="jobApplicationDAO" />
+	</bean>	
+	
+	
+	<bean id="professionInterviewManager" class="com.skynet.retailscm.professioninterview.ProfessionInterviewManagerImpl">
+		<property name="professionInterviewDAO" ref="professionInterviewDAO" />
+	</bean>	
+	
+	
+	<bean id="hrInterviewManager" class="com.skynet.retailscm.hrinterview.HrInterviewManagerImpl">
+		<property name="hrInterviewDAO" ref="hrInterviewDAO" />
+	</bean>	
+	
+	
+	<bean id="offerApprovalManager" class="com.skynet.retailscm.offerapproval.OfferApprovalManagerImpl">
+		<property name="offerApprovalDAO" ref="offerApprovalDAO" />
+	</bean>	
+	
+	
+	<bean id="offerAcceptanceManager" class="com.skynet.retailscm.offeracceptance.OfferAcceptanceManagerImpl">
+		<property name="offerAcceptanceDAO" ref="offerAcceptanceDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeBoardingManager" class="com.skynet.retailscm.employeeboarding.EmployeeBoardingManagerImpl">
+		<property name="employeeBoardingDAO" ref="employeeBoardingDAO" />
+	</bean>	
+	
+	
+	<bean id="instructorManager" class="com.skynet.retailscm.instructor.InstructorManagerImpl">
+		<property name="instructorDAO" ref="instructorDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	</bean>	
+	
+	
+	<bean id="companyTrainingManager" class="com.skynet.retailscm.companytraining.CompanyTrainingManagerImpl">
+		<property name="companyTrainingDAO" ref="companyTrainingDAO" />
+	 		<property name="retailStoreCountryCenterDAO" ref="retailStoreCountryCenterDAO" />
+	 		<property name="instructorDAO" ref="instructorDAO" />
+	 		<property name="trainingCourseTypeDAO" ref="trainingCourseTypeDAO" />
+	</bean>	
+	
+	
+	<bean id="scoringManager" class="com.skynet.retailscm.scoring.ScoringManagerImpl">
+		<property name="scoringDAO" ref="scoringDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeCompanyTrainingManager" class="com.skynet.retailscm.employeecompanytraining.EmployeeCompanyTrainingManagerImpl">
+		<property name="employeeCompanyTrainingDAO" ref="employeeCompanyTrainingDAO" />
+	 		<property name="companyTrainingDAO" ref="companyTrainingDAO" />
+	 		<property name="scoringDAO" ref="scoringDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeSkillManager" class="com.skynet.retailscm.employeeskill.EmployeeSkillManagerImpl">
+		<property name="employeeSkillDAO" ref="employeeSkillDAO" />
+	 		<property name="skillTypeDAO" ref="skillTypeDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeePerformanceManager" class="com.skynet.retailscm.employeeperformance.EmployeePerformanceManagerImpl">
+		<property name="employeePerformanceDAO" ref="employeePerformanceDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeWorkExperienceManager" class="com.skynet.retailscm.employeeworkexperience.EmployeeWorkExperienceManagerImpl">
+		<property name="employeeWorkExperienceDAO" ref="employeeWorkExperienceDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeLeaveManager" class="com.skynet.retailscm.employeeleave.EmployeeLeaveManagerImpl">
+		<property name="employeeLeaveDAO" ref="employeeLeaveDAO" />
+	 		<property name="leaveTypeDAO" ref="leaveTypeDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeInterviewManager" class="com.skynet.retailscm.employeeinterview.EmployeeInterviewManagerImpl">
+		<property name="employeeInterviewDAO" ref="employeeInterviewDAO" />
+	 		<property name="interviewTypeDAO" ref="interviewTypeDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeAttendanceManager" class="com.skynet.retailscm.employeeattendance.EmployeeAttendanceManagerImpl">
+		<property name="employeeAttendanceDAO" ref="employeeAttendanceDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeQualifierManager" class="com.skynet.retailscm.employeequalifier.EmployeeQualifierManagerImpl">
+		<property name="employeeQualifierDAO" ref="employeeQualifierDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeEducationManager" class="com.skynet.retailscm.employeeeducation.EmployeeEducationManagerImpl">
+		<property name="employeeEducationDAO" ref="employeeEducationDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeAwardManager" class="com.skynet.retailscm.employeeaward.EmployeeAwardManagerImpl">
+		<property name="employeeAwardDAO" ref="employeeAwardDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="employeeSalarySheetManager" class="com.skynet.retailscm.employeesalarysheet.EmployeeSalarySheetManagerImpl">
+		<property name="employeeSalarySheetDAO" ref="employeeSalarySheetDAO" />
+	 		<property name="salaryGradeDAO" ref="salaryGradeDAO" />
+	 		<property name="payingOffDAO" ref="payingOffDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+	
+	<bean id="payingOffManager" class="com.skynet.retailscm.payingoff.PayingOffManagerImpl">
+		<property name="payingOffDAO" ref="payingOffDAO" />
+	 		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>	
+	
+
+
+
+</beans>
+
+
+
+
+
+
