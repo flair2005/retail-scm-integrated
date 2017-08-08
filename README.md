@@ -6,5 +6,5 @@
 
 功能列表
 
-![功能列表](/functions.jpg "Optional title")
+![功能列表](/scm.jpg "Optional title")
 
